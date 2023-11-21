@@ -130,13 +130,14 @@
 	</f7Page>
 </template>
 <script lang="ts">
+import { RoutedPage } from "@/model/RoutedPage";
 import { f7Page, f7Navbar, f7List, f7ListItem, f7BlockTitle, f7ListInput, f7Range, f7Toggle  } from "framework7-vue";
-import { Component, Vue } from "vue-facing-decorator";
+import { Component } from "vue-facing-decorator";
 
 @Component({
 	components: {
 		f7Page, f7Navbar, f7List, f7ListItem, f7BlockTitle, f7ListInput, f7Range, f7Toggle
 	}
 })
-export default class Settings extends Vue {}
+export default class Settings extends RoutedPage {}
 </script>

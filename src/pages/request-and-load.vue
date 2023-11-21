@@ -20,8 +20,9 @@
 	</f7Page>
 </template>
 <script lang="ts">
+import { RoutedPage } from "@/model/RoutedPage";
 import { f7Page, f7Navbar, f7Block, f7List, f7ListItem } from "framework7-vue";
-import { Component, Prop, Vue } from "vue-facing-decorator";
+import { Component, Prop } from "vue-facing-decorator";
 
 // Define a type for the user object
 interface User {
@@ -36,7 +37,7 @@ interface User {
 		f7Page, f7Navbar, f7Block, f7List, f7ListItem
 	}
 })
-export default class RequestAndLoad extends Vue {
+export default class RequestAndLoad extends RoutedPage {
 	@Prop({required: true}) user!: User;
 }
 </script>

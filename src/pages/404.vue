@@ -11,8 +11,9 @@
 	</f7Page>
 </template>
 <script lang="ts">
+import { RoutedPage } from "@/model/RoutedPage";
 import { f7Page, f7Navbar, f7Block  } from "framework7-vue";
-import { Component, Vue } from "vue-facing-decorator";
+import { Component } from "vue-facing-decorator";
 
 @Component({
 	components: {
@@ -21,5 +22,5 @@ import { Component, Vue } from "vue-facing-decorator";
 		f7Page
 	}
 })
-export default class NotFoundPage extends Vue {}
+export default class NotFoundPage extends RoutedPage {}
 </script>

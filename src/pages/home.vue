@@ -203,7 +203,8 @@ import {
 } from "framework7-vue";
 import Navbar from "@/components/Navbar.vue";
 import { useCounterStore } from "../stores/counter";
-import { Component, Vue } from "vue-facing-decorator";
+import { Component } from "vue-facing-decorator";
+import { RoutedPage } from "@/model/RoutedPage";
 
 @Component({
 	components: {
@@ -218,7 +219,7 @@ import { Component, Vue } from "vue-facing-decorator";
 		Navbar
 	}
 })
-export default class About extends Vue {
+export default class About extends RoutedPage {
 	counter = useCounterStore();
 }
 </script>
