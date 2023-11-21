@@ -1,63 +1,63 @@
 <template>
-	<f7-page name="settings">
-		<f7-navbar title="Settings" />
+	<f7Page name="settings">
+		<f7Navbar title="Settings" />
 
-		<f7-block-title>Form Example</f7-block-title>
-		<f7-list no-hairlines-md>
-			<f7-list-input
+		<f7BlockTitle>Form Example</f7BlockTitle>
+		<f7List no-hairlines-md>
+			<f7ListInput
 				label="Name"
 				type="text"
 				placeholder="Your name"
 			/>
 
-			<f7-list-input
+			<f7ListInput
 				label="E-mail"
 				type="email"
 				placeholder="E-mail"
 			/>
 
-			<f7-list-input
+			<f7ListInput
 				label="URL"
 				type="url"
 				placeholder="URL"
 			/>
 
-			<f7-list-input
+			<f7ListInput
 				label="Password"
 				type="password"
 				placeholder="Password"
 			/>
 
-			<f7-list-input
+			<f7ListInput
 				label="Phone"
 				type="tel"
 				placeholder="Phone"
 			/>
 
-			<f7-list-input
+			<f7ListInput
 				label="Gender"
 				type="select"
 			>
 				<option>Male</option>
 				<option>Female</option>
-			</f7-list-input>
+			</f7ListInput>
 
-			<f7-list-input
+			<f7ListInput
 				label="Birth date"
 				type="date"
 				placeholder="Birth day"
 				default-value="2014-04-30"
 			/>
 
-			<f7-list-item
+			<f7ListItem
 				title="Toggle"
 			>
 				<template #after>
 					<f7-toggle />
 				</template>
-			</f7-list-item>
+			</f7ListItem>
 
-			<f7-list-input
+			<f7ListInput
 				label="Range"
 				:input="false"
 			>
@@ -69,66 +69,74 @@
 						:step="1"
 					/>
 				</template>
-			</f7-list-input>
+			</f7ListInput>
 
-			<f7-list-input
+			<f7ListInput
 				type="textarea"
 				label="Textarea"
 				placeholder="Bio"
 			/>
-			<f7-list-input
+			<f7ListInput
 				type="textarea"
 				label="Resizable"
 				placeholder="Bio"
 				resizable
 			/>
-		</f7-list>
+		</f7List>
 
-		<f7-block-title>Checkbox group</f7-block-title>
-		<f7-list>
-			<f7-list-item
+		<f7BlockTitle>Checkbox group</f7BlockTitle>
+		<f7List>
+			<f7ListItem
 				checkbox
 				name="my-checkbox"
 				value="Books"
 				title="Books"
 			/>
-			<f7-list-item
+			<f7ListItem
 				checkbox
 				name="my-checkbox"
 				value="Movies"
 				title="Movies"
 			/>
-			<f7-list-item
+			<f7ListItem
 				checkbox
 				name="my-checkbox"
 				value="Food"
 				title="Food"
 			/>
-		</f7-list>
+		</f7List>
 
-		<f7-block-title>Radio buttons group</f7-block-title>
-		<f7-list>
-			<f7-list-item
+		<f7BlockTitle>Radio buttons group</f7BlockTitle>
+		<f7List>
+			<f7ListItem
 				radio
 				name="radio"
 				value="Books"
 				title="Books"
 			/>
-			<f7-list-item
+			<f7ListItem
 				radio
 				name="radio"
 				value="Movies"
 				title="Movies"
 			/>
-			<f7-list-item
+			<f7ListItem
 				radio
 				name="radio"
 				value="Food"
 				title="Food"
 			/>
-		</f7-list>
-	</f7-page>
+		</f7List>
+	</f7Page>
 </template>
-<script setup lang="ts">
+<script lang="ts">
 import { f7Page, f7Navbar, f7List, f7ListItem, f7BlockTitle, f7ListInput, f7Range, f7Toggle  } from "framework7-vue";
+import { Component, Vue } from "vue-facing-decorator";
+
+@Component({
+	components: {
+		f7Page, f7Navbar, f7List, f7ListItem, f7BlockTitle, f7ListInput, f7Range, f7Toggle
+	}
+})
+export default class Settings extends Vue {}
 </script>

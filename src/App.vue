@@ -220,7 +220,6 @@ export default class App extends Vue {
 				capacitorApp.init(f7);
 			}
 			// Call F7 APIs here
-			console.log(this.device);
 		});
 	}
 }

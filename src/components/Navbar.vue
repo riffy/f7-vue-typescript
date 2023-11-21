@@ -1,11 +1,11 @@
 <template>
-	<f7-navbar :sliding="false">
-		<f7-nav-left>
-			<f7-link panel-open="left">
+	<f7Navbar :sliding="false">
+		<f7NavLeft>
+			<f7Link panel-open="left">
 				<i class="i-mdi-menu w-6 h-6" />
-			</f7-link>
-		</f7-nav-left>
-		<f7-nav-title
+			</f7Link>
+		</f7NavLeft>
+		<f7NavTitle
 			sliding
 			class="flex items-center uppercase tracking-wider text-color-primary"
 			text="lg"
@@ -13,20 +13,20 @@
 		>
 			<i class="i-simple-icons-framework7 w-5 h-5 mr-1" /> F7-Vue
 			TypeScript
-		</f7-nav-title>
-		<f7-nav-right>
+		</f7NavTitle>
+		<f7NavRight>
 			<div class="flex items-center">
-				<f7-link
+				<f7Link
 					class="min-w-a px-1"
 					popover-open=".popover-menu"
 				>
 					<i
 						class="i-mdi-palette-swatch-outline w-5 h-5 text-color-primary"
 					/>
-				</f7-link>
-				<f7-link
+				</f7Link>
+				<f7Link
 					class="min-w-a px-1"
-					@click="isDark = !isDark"
+					@click="toggleDarkMode"
 				>
 					<i
 						v-if="isDark"
@@ -36,29 +36,29 @@
 						v-else
 						class="i-tabler-sun w-5 h-5"
 					/>
-				</f7-link>
+				</f7Link>
 				<div class="flex items-center border-l-3 border-white">
-					<f7-link
+					<f7Link
 						href="https://github.com/sajjadalis/f7-vue-typescript"
 						target="_blank"
 						class="min-w-a px-1"
 						external
 					>
 						<i class="i-carbon-logo-github w-5 h-5" />
-					</f7-link>
+					</f7Link>
 				</div>
 			</div>
-		</f7-nav-right>
-	</f7-navbar>
+		</f7NavRight>
+	</f7Navbar>
 
-	<f7-popover class="popover-menu">
-		<f7-block>
+	<f7Popover class="popover-menu">
+		<f7Block>
 			<div class="grid grid-cols-6 large-grid-cols-6 grid-gap">
 				<div
 					v-for="(color, index) in colors"
 					:key="index"
 				>
-					<f7-button
+					<f7Button
 						fill
 						round
 						small
@@ -68,11 +68,10 @@
 					/>
 				</div>
 			</div>
-		</f7-block>
-	</f7-popover>
+		</f7Block>
+	</f7Popover>
 </template>
-<script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+<script lang="ts">
 import {
 	f7,
 	f7Navbar,
@@ -84,51 +83,60 @@ import {
 	f7Block,
 	f7Button,
 } from "framework7-vue";
+import { Component, Vue } from "vue-facing-decorator";
 
-// COLOR THEMES
-const colors: string[] = Object.keys(f7.colors).filter(
-	c => c !== "primary" && c !== "white" && c !== "black"
-);
-
-const setColorTheme = (c: string): void => {
-	hexColor.value = f7.colors[c];
-	f7.setColorTheme(hexColor.value!);
-	localStorage.setItem("themeColor", hexColor.value!);
-};
-
-const hexColor = ref<string | null>(null);
-
-onMounted(() => {
-	// Check for themeColor value inside localStorage
-	hexColor.value = localStorage.getItem("themeColor");
-	if (hexColor.value !== null) {
-		f7.setColorTheme(hexColor.value);
+@Component({
+	components: {
+		f7Navbar,
+		f7NavRight,
+		f7NavLeft,
+		f7Link,
+		f7NavTitle,
+		f7Popover,
+		f7Block,
+		f7Button
 	}
-});
+})
+export default class Navbar extends Vue {
+	colors: string[] = Object.keys(f7.colors).filter(
+		c => c !== "primary" && c !== "white" && c !== "black"
+	);
+	isDark: boolean = false;
+	hexColor: string | null = null;
 
-// DARK MODE
-const isDark = ref<boolean>(false);
-
-onMounted(() => {
-	// Check for darkMode value inside localStorage
-	const darkMode = localStorage.getItem("darkMode") as string | null;
-	if (darkMode) {
-		isDark.value = true;
+	setColorTheme(c: string): void {
+		this.hexColor = f7.colors[c];
+		if (!this.hexColor) return;
+		f7.setColorTheme(this.hexColor);
+		localStorage.setItem("themeColor", this.hexColor);
 	}
-});
 
-watch(
-	() => isDark.value,
-	(val: boolean) => {
-		if (val === true) {
-			f7.setDarkMode(true);
-			// Persist darkMode value in localStorage
-			localStorage.setItem("darkMode", "true");
-		} else {
-			f7.setDarkMode(false);
-			// Remove the darkMode value from localStorage
-			localStorage.removeItem("darkMode");
+	mounted() {
+		// Check for themeColor value inside localStorage
+		this.hexColor = localStorage.getItem("themeColor");
+		if (this.hexColor) {
+			f7.setColorTheme(this.hexColor);
 		}
+
+		const darkMode = localStorage.getItem("darkMode") as string | null;
+		this.isDark = !!darkMode;
+		if (this.isDark) {
+			this.$nextTick(() => {
+				f7.setDarkMode(this.isDark);
+			});
+		}
+
+			
 	}
-);
+
+	toggleDarkMode() {
+		this.isDark = !this.isDark;
+		f7.setDarkMode(this.isDark);
+		if (this.isDark)
+			localStorage.setItem("darkMode", `${this.isDark}`);
+		else
+			localStorage.removeItem("darkMode");
+	}
+
+}
 </script>
