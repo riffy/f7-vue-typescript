@@ -1,0 +1,57 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "plugin:vue/vue3-recommended",
+        "eslint:recommended",
+        "@vue/typescript/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2021
+    },
+    "plugins": [
+    ],
+	"ignorePatterns": ["**/data/debug/debug_data.ts"],
+    "rules": {
+        "vue/script-indent": [
+            "error", 
+            "tab"
+        ],
+		"vue/html-indent": [
+            "error", 
+            "tab"
+        ],
+        "indent": [
+            "error",
+            "tab",
+            {"SwitchCase": 1}
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "vue/no-use-v-if-with-v-for": "off",
+		"@typescript-eslint/no-inferrable-types": "off",
+		"vue/multi-word-component-names": "off"
+    },
+    "overrides": [
+        {
+            "files": ["*.vue"],
+            "rules": {
+                "indent": "off"
+            }
+        }
+    ]
+}
+  
